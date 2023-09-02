@@ -1,1 +1,1 @@
-I am a mid-level software engineer 👨‍💻 with infosec niche. I work on network stack programming, systems programming and cryptography implementations. 
+Mid-level software engineer 👨‍💻 passionate about infosec. I work on network stack programming, systems programming, cryptography implementations and ocassionally on android and web.
