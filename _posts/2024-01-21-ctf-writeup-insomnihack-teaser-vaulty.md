@@ -2,7 +2,7 @@
 title: Insomni'hack CTF Teaser 2024 - Vaulty Writeup
 description: Linux ELF RCE challenge with buffer overflow and format string vulnerabilities. 
 date: 2024-01-21 19:10:00 +0530
-categories: [CTF Writeup, Pwn]
+categories: [CTF Writeup, Insomni'hack CTF Teaser 2024]
 tags: [pwn, buffer-overflow, format-string-injection]
 ---
 

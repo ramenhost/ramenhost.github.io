@@ -2,7 +2,7 @@
 title: Insomni'hack CTF Teaser 2024 - InsoBank Writeup
 description: Exploit MySQL decimal rounding off and TOCTOU race condition in a Internet Banking website. 
 date: 2024-01-21 19:15:00 +0530
-categories: [CTF Writeup, Web]
+categories: [CTF Writeup, Insomni'hack CTF Teaser 2024]
 tags: [web, race-condition]
 ---
 

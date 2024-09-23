@@ -2,7 +2,7 @@
 title: LA CTF 2024 - holyT Writeup
 description: Leak RSA prime factor from a remote service that calculates square root (mod N) using CRT optimization.
 date: 2024-03-01 18:35:00 +0530
-categories: [CTF Writeup, Crypto]
+categories: [CTF Writeup, LA CTF 2024]
 tags: [cryptography, rsa]
 ---
 
