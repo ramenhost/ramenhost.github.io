@@ -16,14 +16,14 @@ timezone: Asia/Calcutta
 
 title: ramenhost's blog # the main title
 
-tagline: Yet another infosec blog # it will display as the sub-title
+tagline: Breaking code & ciphers # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  Personal blog by ramenhost. I write about infosec, CTF writeups, programming, and other stuff.
+  Personal blog by ramenhost. Posts about infosec, CTF writeups, programming, and stuff.
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://ramen.host"
+url: "https://ramenhost.dev"
 
 github:
   username: ramenhost # change to your github username
@@ -38,6 +38,7 @@ social:
   email: # change to your email address
   links:
     # The first element serves as the copyright owner's link
+    - https://bsky.app/profile/ramenhost.dev # Bluesky
     - https://twitter.com/ramenhost # change to your twitter homepage
     - https://github.com/ramenhost # change to your github homepage
     # Uncomment below to add more social links
@@ -136,7 +137,7 @@ assets:
     env: # [development | production]
 
 pwa:
-  enabled: true # the option for PWA feature (installable)
+  enabled: false # the option for PWA feature (installable)
   cache:
     enabled: true # the option for PWA offline cache
     # Paths defined here will be excluded from the PWA cache.
