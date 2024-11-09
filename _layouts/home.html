@@ -4,56 +4,7 @@ refactor: true
 ---
 {% include lang.html %}
 
-<article class="flex flex-col items-center justify-center text-center">
-  <h1 class="site-title">Hi, I am Ramkumar (@ramenhost)</h1>
-  <a
-    href="https://github.com/ramenhost"
-    aria-label="github"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="social-link"
-  >
-    <i class="fab fa-github"></i>
-  </a>
-
-  <a
-    href="https://bsky.app/profile/ramenhost.dev"
-    aria-label="bluesky"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="social-link"
-  >
-    <i class="fa-brands fa-bluesky"></i>
-  </a>
-
-  <a
-    href="https://twitter.com/ramenhost"
-    aria-label="twitter"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="social-link"
-  >
-    <i class="fa-brands fa-x-twitter"></i>
-  </a>
-
-  <style>
-    .social-link {
-      margin: 0 10px;
-      font-size: 1.5em;
-    }
-  </style>
-  <section class="prose dark:prose-invert">
-    <p style="font-size: 1.2em;">
-      I work on systems programming, cryptography, reverse engineering, and application security. Occasionally, you can
-      find me in Capture the Flag events. Feel free to reach out if you'd like to connect!
-    </p>
-  </section>
-</article>
-
-<div style="height: 20px;"></div>
-<div class="flex justify-start w-full">
-  <h1 class="text-left">Recent</h1>
-</div>
+{% include intro.html %}
 
 {% assign all_pinned = site.posts | where: 'pin', 'true' %}
 {% assign all_normal = site.posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %}
