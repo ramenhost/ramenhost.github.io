@@ -105,7 +105,7 @@ I used Return oriented programming (ROP) to set the stack suitable for calling `
 ### 2. Stack alignment problems
 After setting up the exploit, I was able to successfully redirect control flow into libc's `system()`. However I got SIGSEGV inside `do_system()` on `movabs` instruction. With breakpoint set to `system()`, I verfied contents of the stack just before the control jumps into libc. The return address was properly replaced and `rdi` had pointer to string `/bin/sh`. This should result in successful shell, but SIGSEGV got me like,  
 
-![Jackie chan confused](../images/vaulty/jackie-confused.png){:style="display:block; margin-left:auto; margin-right:auto"}
+![Jackie chan confused](../images/vaulty/jackie-confused.jpg){:style="display:block; margin-left:auto; margin-right:auto"}
 
 Like always, stackoverflow got me covered. This [post](https://stackoverflow.com/questions/54393105/libcs-system-when-the-stack-pointer-is-not-16-padded-causes-segmentation-faul) explains the stack alignment requirement in x86_64. The stack has to be 16-byte aligned, found out the hard way. I added one extra `ret` gadget on top of my ROP chain to fix this.
 

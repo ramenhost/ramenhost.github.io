@@ -4,7 +4,7 @@ description: Write ups for the challenges I solved in Patriot CTF 2024.
 date: 2024-09-23 14:35:00 +0530
 categories: [CTF Writeup, Patriot CTF 2024]
 tags: [cryptography, rsa, aes, pwn, rop, buffer-overflow]
-image: ../images/patriot-ctf/pctf-cert.png
+image: ../images/patriot-ctf/pctf-cert.jpg
 ---
 
 > All CTF files can be found in Github repository [patriot-ctf-2024](https://github.com/ramenhost/ctf-writeups/tree/main/patriot-ctf-2024)
@@ -111,10 +111,10 @@ AES block size is 16 bytes. By controlling our input length, we can control how 
 
 Let's assume flag to be `PCTF{UNKNOWN}`. The below table shows how AES first block changes with input length.
 
-| Input              | Input + Flag (`AES first block`)| No of flag chars in first block |
-|--------------------|---------------------------------|---------------------------------|
-| AAAAAAAAAAAAAAA    | `AAAAAAAAAAAAAAAP`CTF{UNKNOWN}  |  1                              |
-| AAAAAAAAAAAAAA     | `AAAAAAAAAAAAAAPC`TF{UNKNOWN}   |  2                              |
+| Input           | Input + Flag (`AES first block`) | No of flag chars in first block |
+| --------------- | -------------------------------- | ------------------------------- |
+| AAAAAAAAAAAAAAA | `AAAAAAAAAAAAAAAP`CTF{UNKNOWN}   | 1                               |
+| AAAAAAAAAAAAAA  | `AAAAAAAAAAAAAAPC`TF{UNKNOWN}    | 2                               |
 
 To brute force the first character of the flag, we can send input of length 15 `AAAAAAAAAAAAAAA` and consider the output's first block as truth ciphertext. 
 ```
