@@ -4,8 +4,8 @@
   icon: "fab fa-github"
 
 - type: bluesky
-  icon: 'fa-brands fa-bluesky'
-  url: 'https://bsky.app/profile/ramenhost.dev'
+  icon: "fa-brands fa-bluesky"
+  url: "https://bsky.app/profile/ramenhost.dev"
 
 - type: twitter
   icon: "fa-brands fa-x-twitter"
