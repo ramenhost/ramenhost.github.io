@@ -1,6 +1,6 @@
 ---
 title: Today I Learned
-description: Microblog of some small things I've learned.
+description: Microblogs of some small things I've learned.
 date: 2024-11-28 13:51:00 +0530
 categories: [Microblog]
 tags: [programming, home-lab, networking]
