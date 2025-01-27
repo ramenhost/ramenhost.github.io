@@ -38,6 +38,7 @@ social:
   email: # change to your email address
   links:
     # The first element serves as the copyright owner's link
+    - https://ramenhost.dev
     - https://bsky.app/profile/ramenhost.dev # Bluesky
     - https://twitter.com/ramenhost # change to your twitter homepage
     - https://github.com/ramenhost # change to your github homepage
