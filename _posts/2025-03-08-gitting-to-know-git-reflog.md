@@ -4,7 +4,7 @@ description: "A deep dive into git reflog with examples"
 date: 2025-03-08 15:15:00 +0530
 categories: [General]
 tags: [git, programming]
-media_subpath: ../../images/git-reflog
+image: ../images/git-reflog/header.jpg
 ---
 
 We know that git tracks changes to files in working directory, allowing us to easily undo modifications or revert to previous states. But what happens when we accidentally delete an unpublished branch or perform hard reset to a wrong commit? That's when we need undo button for the git operation itself. Have you ever used `git reset --hard` and then scrambled to recover your changes by copying commands from Stackoverflow or ChatGPT? If so, you've likely encountered `git reflog`. Think of it as a micro version control (log) for your Git references. For straight forward reverting of file changes, read this blog post from GitHub, [How to undo (almost) anything with Git](https://github.blog/open-source/git/how-to-undo-almost-anything-with-git/). While the GitHub's post covers reflog in brief, it doesn't delve into reflog's full power. There are articles with reflog commands to recover but I did not see any that explained why or how it works. This post aims to explain the internals of git in the context of reflog with examples.
@@ -17,7 +17,7 @@ It is a common misconception that git stores commits as diffs from the previous 
 
 The folder `.git/objects` inside a repository is sort of an object database where git stores many objects. Now, what are these objects? Git stores commits, trees, and blobs as objects. A commit object contains metadata like author, commit message, parent commit ID, and a reference to a tree object (the snapshot of working directory). A tree object contains references to blobs (files) and other tree objects (subdirectories). A blob object contains the file contents. What matters is that given a commit ID, git can fetch the tree object ID and from there, recursively fetch all the blobs to recreate the working directory at that commit. Julia Evans (@b0rk) has a great zine on this topic, [Git - wizardzines](https://wizardzines.com/zines/git/).
 
-![inside a git commit](inside-commit.png)
+![inside a git commit](../images/git-reflog/inside-commit.png)
 Source: [https://wizardzines.com/zines/git/](https://wizardzines.com/zines/git/)
 
 ### References
@@ -51,7 +51,7 @@ $ cat .git/HEAD
 ref: refs/heads/devel
 ```
 
-![how git log works](git-log.png)
+![how git log works](../images/git-reflog/git-log.png)
 
 ## Git reflog
 Before we dive into reflog, let's understand what happens when we do a `git reset --hard`. The `git reset` command is used to move the branch reference to a different commit. The `--hard` option tells git to update the working directory to match the commit contents. `git reset --hard HEAD~1` is used to remove the latest commit from the branch. The `HEAD~1` is a shorthand for the commit that is one before the current commit.
@@ -67,7 +67,7 @@ $ cat .git/refs/heads/devel
 0733b445485af40a798d6d07dc72f84986025975
 ```
 
-![how git reset looks](git-reset-looks.png)
+![how git reset looks](../images/git-reflog/git-reset-looks.png)
 
 But what happened to the `758f588` commit? It is still there, but the branch reference is no longer pointing to it. 
 
@@ -93,7 +93,7 @@ develop hello.hs
 
 As seen above, the commit object of `758f588` is still there, but the branch reference is no longer pointing to it. The commit `758f588` is no longer connected to any chain that starts from a reference (`refs/heads/devel` or `refs/heads/master`). This is why the commit is not visible in `git log`. But the commit object, including its snapshot, is still present in the object database. Hence, a more accurate representation of the reset operation would be below.
 
-![how git reset works](git-reset-actual.png)
+![how git reset works](../images/git-reflog/git-reset-actual.png)
 
 If we know the lost commit ID, we can still see the commit. We can also reset back to that commit and recover the changes. But who remembers commit IDs? This is where reflog comes in. Reflog is a log of all changes to references. When we do a `git reset --hard`, git logs the previous commit ID in reflog. This is why reflog can be used to recover from accidental resets.
 
@@ -157,7 +157,7 @@ $ git branch
 * master
 ```
 
-![branch deletion](delete-devel.png)
+![branch deletion](../images/git-reflog/delete-devel.png)
 
 Now, let's use reflog to find the lost commit ID. When we moved from devel to master, the HEAD reference `.git/HEAD` was updated to point to `refs/heads/master`. This change to HEAD reference would have been captured by reflog. With this, we can know the commit ID that HEAD was pointing to before the branch was deleted.
 
@@ -169,7 +169,7 @@ c0c0f13 (HEAD -> master, origin/master, origin/HEAD) HEAD@{0}: checkout: moving 
 
 As seen in reflog, the tip of the devel branch was `758f588`. Now, we must checkout to that commit. Wait, checkout? how does `checkout` differ from `reset`? The `reset` command moves the current branch (master) reference to a different commit. We don't want to change tip of master. The `checkout` command moves the HEAD reference to a different branch/commit. 
 
-![checkout to an unreachable commit](checkout-deleted-commit.png)
+![checkout to an unreachable commit](../images/git-reflog/checkout-deleted-commit.png)
 
 ```bash
 $ git checkout HEAD@{1}                              
@@ -211,7 +211,7 @@ $ git branch
   master
 ```
 
-![recovered devel from detached HEAD](branch-from-detached-head.png)
+![recovered devel from detached HEAD](../images/git-reflog/branch-from-detached-head.png)
 
 ### Scenario 3: Unwanted amend commit happened!
 Let's say we have made changes and committed them. But we realize that we missed something and want to amend the commit. We can use `git commit --amend` to add the changes to the previous commit. As a shell "up arrow" enthusiast, I have done amend commit instead of a new commit sometimes. How do we undo this while preserving the changes?
@@ -241,7 +241,7 @@ $ git log -n2 --oneline
 
 Do you see how the commit ID changed from `758f588` to `2942b82`? It is because git has created an enirely new commit object. 
 
-![amend commit](amend-commit.png)
+![amend commit](../images/git-reflog/amend-commit.png)
 
 The previous commit object ID can be found in reflog.
 
