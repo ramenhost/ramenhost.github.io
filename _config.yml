@@ -35,11 +35,10 @@ social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Ramkumar
-  email: # change to your email address
+  email: ramenhost@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
     - https://ramenhost.dev
-    - https://bsky.app/profile/ramenhost.dev # Bluesky
     - https://twitter.com/ramenhost # change to your twitter homepage
     - https://github.com/ramenhost # change to your github homepage
     # Uncomment below to add more social links
